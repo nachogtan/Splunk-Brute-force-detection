@@ -13,7 +13,7 @@ This repository contains a lab and detection pipeline for simulating brute-force
 - [Architecture](#architecture)
 - [Requirements](#requirements)
 - [Attack simulation (lab only)](#attack-simulation-lab-only)
-- [Splunk searches (SPL)](#splunk-searches-spl)
+- [Splunk Analysis (SPL)](#splunk-analysis-spl)
 - [Dashboards & Alerts](#dashboards--alerts)
 - [MITRE ATT&CK mapping](#mitre-attck-mapping)
 - [Playbook (L1)](#playbook-l1)
@@ -102,10 +102,10 @@ This simulation demonstrates a controlled brute-force attack (`MITRE ATT&CK T111
 
 ### Attacker
 - Kali Linux IP: `192.168.70.30`
-- Tools: hydra, nmap, optional curl
+- Tools: hydra, nmap, curl
 
 Now that we have the lab set up to imitate this TTP, we are going to run our first commands on the attack machine.
-1. The first step is to perform a quick nmap scan to the target network looking for live hosts en vulnerabilities.
+1. The first step is to perform a quick nmap scan to the target network looking for live hosts for vulnerabilities.
 
 ```zsh
 └─$ nmap -sS -sV -O 192.168.60.1/24
@@ -144,10 +144,30 @@ Service Info: Host: WIN-E00DDLM1BPK; OS: Windows; CPE: cpe:/o:microsoft:windows
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 256 IP addresses (2 hosts up) scanned in 19.39 seconds
 ```
-So, this first `nmap`scan show us the IP of the domain controler and enumerated the open ports. The next step is try to leverage the well know vulnerabilitie `T1110`.
+This initial Nmap scan identifies the IP of the domain controller and enumerates its open ports. The next step is to simulate a controlled brute-force attack using the `T1110` technique.
 
 **MITRE ATT&CK Mapping:**  
 - Technique: T1110 – Brute Force  
 - Sub-technique: T1110.001 – Password Guessing  
 - Vector: RDP login attempts on Windows Server  
 - Data sources: Windows Security logs (4625), Splunk UF, syslog
+
+2. Next, we ran a dictionary attack against the target machine using the well-known  `/usr/share/wordlists/rockyou.txt.gz`.
+
+```zsh
+hydra -l gates.b@corp.com -P /usr/share/wordlists/rockyou.txt.gz rdp://192.168.60.20
+```
+- This command attempts to log in via RDP using the specified username and passwords from the wordlist.
+- Each failed login attempt will generate a Windows Security Event 4625, which will be collected by the Splunk Universal Forwarder.
+
+### Splunk Analysis
+
+After running the lab attack simulation (or simulating failed logins), we can analyze the data in Splunk to detect brute-force attempts.
+
+### 1. Search for Failed Logins (Windows Event 4625)
+```spl
+index=main sourcetype=WinEventLog:Security EventCode=4625
+| stats count by Account_Name, Workstation_Name, src_ip
+| sort -count
+```
+
