@@ -12,7 +12,7 @@ This repository contains a lab and detection pipeline for simulating brute-force
 ## Table of contents
 - [Architecture](#architecture)
 - [Requirements](#requirements)
-- [Attack simulation (lab only)](#attack-simulation-lab-only)
+- [Attack simulation (Red Team)](#attack-simulation-red-team)
 - [Splunk Analysis (SPL)](#splunk-analysis-spl)
 - [Dashboards & Alerts](#dashboards--alerts)
 - [MITRE ATT&CK mapping](#mitre-attck-mapping)
