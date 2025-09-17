@@ -160,14 +160,41 @@ hydra -l gates.b@corp.com -P /usr/share/wordlists/rockyou.txt.gz rdp://192.168.6
 - This command attempts to log in via RDP using the specified username and passwords from the wordlist.
 - Each failed login attempt will generate a Windows Security Event 4625, which will be collected by the Splunk Universal Forwarder.
 
-### Splunk Analysis
+## Splunk Analysis (SPL)
 
-After running the lab attack simulation (or simulating failed logins), we can analyze the data in Splunk to detect brute-force attempts.
+After running the lab attack simulation (failed logins), we can analyze the data in Splunk to detect brute-force attempts.
 
-### 1. Search for Failed Logins (Windows Event 4625)
-```spl
-index=main sourcetype=WinEventLog:Security EventCode=4625
-| stats count by Account_Name, Workstation_Name, src_ip
-| sort -count
+As part of my SOC L1 role in the CORP security team, I started by querying the most relevant Windows Security logs to identify abnormal patterns. Running a broad search by `EventCode` provides a baseline of which events are most common in the environment.
+
+```Splunk Search
+index=main sourcetype=WinEventLog:Security 
+| stats count by EventCode
+| table EventCode count
 ```
+Next, I filtered specifically for failed logon attempts (EventCode=4625), which are the primary indicators of brute-force activity on Windows systems:
+
+```Splunk Search
+index=main sourcetype=WinEventLog:Security EventCode=4625
+```
+After isolating failed logon events (EventCode=4625), I reviewed the most relevant fields:  
+- `Account_Name`  
+- `Workstation_Name`  
+- `Source_Network_Address`  
+
+Among them, the field `Source_Network_Address` revealed the attacker IP: **192.168.70.30** (our Kali machine).
+To validate this observation, I filtered the dataset by this IP:  
+
+```Splunk Search
+index=main sourcetype=WinEventLog:Security EventCode=4625 Source_Network_Address=192.168.70.30
+| stats count by Account_Name, Failure_Reason
+```
+Next, I fine-tuned the query for more granular results and focused on accounts with more than 5 failed login attempts:
+
+```Splunk Search
+index=main sourcetype=WinEventLog:Security EventCode=4625
+| stats count as FailedAttempts by Source_Network_Address, Account_Name
+| where FailedAttempts > 5
+| sort - FailedAttempts
+```
+After running our lab attack simulation, we observed a total of **3,636 failed login events** (EventCode 4625) over a 7-day period. By filtering on the attacker IP `192.168.70.30` and the test account `gates.b@corp.com`, we narrowed the dataset to **3,632 relevant events**. The remaining 4 events had missing or local source information and were excluded from the analysis.
 
