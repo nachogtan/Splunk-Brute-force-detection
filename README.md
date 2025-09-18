@@ -261,4 +261,4 @@ This project is licensed under the MIT License. See [LICENSE](./LICENSE) for det
 ## Contact / Author
 
 Created by Ignacio.  
-GitHub: [nachogtan]([https://github.com/yourusername](https://github.com/nachogtan))
+GitHub: [nachogtan](https://github.com/nachogtan)
