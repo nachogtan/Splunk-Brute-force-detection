@@ -16,7 +16,6 @@ This repository contains a lab and detection pipeline for simulating brute-force
 - [Splunk Analysis (SPL)](#splunk-analysis-spl)
 - [Dashboards & Alerts](#dashboards--alerts)
 - [MITRE ATT&CK mapping](#mitre-attck-mapping)
-- [Playbook (L1)](#playbook-l1)
 - [Evidence & artifacts](#evidence--artifacts)
 - [Repository structure](#repository-structure)
 - [Security & ethics](#security--ethics)
@@ -236,3 +235,30 @@ This project maps directly to the MITRE ATT&CK framework, demonstrating a profes
 - **Vector / Data Source:** Windows Security Logs (4625), Splunk Universal Forwarder, Sysmon, firewall logs  
 
 The lab simulates controlled brute-force attacks against Windows RDP accounts. Failed login events are collected and analyzed in Splunk, using dashboards and alerts for detection and triage. This workflow aligns directly with MITRE ATT&CK T1110, showing the full process from **ingestion → detection → triage → basic response** in a SOC context.
+
+## Evidence & Artifacts
+
+Lab outputs, logs, dashboards, and exported alerts are available in the `artifacts/` folder.  
+These include Windows Security Event logs (4625), screenshots of dashboards, and Splunk saved searches.
+
+## Repository Structure
+
+- `splunk_alerts/` – Saved searches and alert configurations  
+- `playbook/` – L1 analyst playbook for triage  
+- `artifacts/` – Lab logs, screenshots, exported dashboards  
+- `docs/` – Supporting documentation
+
+## Security & Ethics
+
+All attacks are simulated in an isolated lab environment.  
+Do NOT attempt these actions on production systems or external networks.  
+The project follows responsible disclosure and safe experimentation practices.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
+
+## Contact / Author
+
+Created by Ignacio.  
+GitHub: [nachogtan]([https://github.com/yourusername](https://github.com/nachogtan))
