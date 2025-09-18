@@ -198,3 +198,8 @@ index=main sourcetype=WinEventLog:Security EventCode=4625
 ```
 After running our lab attack simulation, we observed a total of **3,636 failed login events** (EventCode 4625) over a 7-day period. By filtering on the attacker IP `192.168.70.30` and the test account `gates.b@corp.com`, we narrowed the dataset to **3,632 relevant events**. The remaining 4 events had missing or local source information and were excluded from the analysis.
 
+## Dashboards & Alerts
+
+<img width="1820" height="1002" alt="brute-force-attack-simulation-RDP" src="https://github.com/user-attachments/assets/534e2ca8-1222-4559-bd68-475c1d434f9c" />
+
+
