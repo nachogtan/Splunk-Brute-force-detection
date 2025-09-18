@@ -200,6 +200,39 @@ After running our lab attack simulation, we observed a total of **3,636 failed l
 
 ## Dashboards & Alerts
 
+To visualize the brute-force simulation, I built a Splunk dashboard focused on failed logon attempts (EventCode=4625).
+The dashboard panels include:
+- Top targeted accounts – The account gates.b@corp.com appears as the main target with over 3,600 failed logins.
+- Top attacker IPs – The Kali machine 192.168.70.30 is identified as the exclusive source of brute-force attempts.
+- Trend over time – Failed logins concentrated within a short window, reflecting a brute-force dictionary attack pattern.
+
+This dashboard gives SOC analysts immediate situational awareness. Instead of manually parsing raw logs, the analyst can quickly identify:
+- Which accounts are under attack.
+- Which IPs are responsible.
+- Whether the activity indicates brute-force behavior (high frequency, same source, repeated failures).
+
+By combining these views, the dashboard provides a practical detection & triage tool, mapped directly to MITRE ATT&CK technique T1110 (Brute Force).
+
 <img width="1820" height="1002" alt="brute-force-attack-simulation-RDP" src="https://github.com/user-attachments/assets/534e2ca8-1222-4559-bd68-475c1d434f9c" />
 
+Based on the following query, I created a Splunk alert that triggers whenever an account experiences more than 5 failed login attempts within a 15-minute window.
 
+```Splunk Search
+index=main sourcetype=WinEventLog:Security EventCode=4625
+| stats count as FailedAttempts by Source_Network_Address, Account_Name
+| where FailedAttempts > 5
+```
+
+<img width="1576" height="296" alt="alert" src="https://github.com/user-attachments/assets/c8ea368c-be9a-410d-87ab-c4ac5eb6b38a" />
+
+This alert complements the dashboard panels, providing automated detection of brute-force attempts on Windows RDP accounts.
+
+## MITRE ATT&CK Mapping
+
+This project maps directly to the MITRE ATT&CK framework, demonstrating a professional approach to threat detection:
+
+- **Technique:** T1110 – Brute Force  
+- **Sub-technique:** T1110.001 – Password Guessing (RDP login attempts)  
+- **Vector / Data Source:** Windows Security Logs (4625), Splunk Universal Forwarder, Sysmon, firewall logs  
+
+The lab simulates controlled brute-force attacks against Windows RDP accounts. Failed login events are collected and analyzed in Splunk, using dashboards and alerts for detection and triage. This workflow aligns directly with MITRE ATT&CK T1110, showing the full process from **ingestion → detection → triage → basic response** in a SOC context.
