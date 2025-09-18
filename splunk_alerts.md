@@ -1,11 +1,8 @@
-index=main sourcetype=WinEventLog:Security EventCode=4625
-| stats count by Account_Name, Workstation_Name, src_ip
-| sort -count
 
----
+```spl
 index=main sourcetype=WinEventLog:Security EventCode=4625
-
-	
+```
+```spl	
 09/16/2025 09:00:46 AM
 LogName=Security
 EventCode=4625
@@ -74,39 +71,58 @@ Collapse
     host = WIN-E00DDLM1BPK
     source = WinEventLog:Security
     sourcetype = WinEventLog:Security
+```
 
 
 ---
 
+```spl
+index=main sourcetype=WinEventLog:Security EventCode=4625
+| stats count by Account_Name, Workstation_Name, src_ip
+| sort -count
+```
+---
+
+```spl
 index=main sourcetype=WinEventLog:Security EventCode=4625 Source_Network_Address=192.168.70.30
 | stats count by Account_Name, Failure_Reason
-
+```
 ---
 
+```spl
 index=main sourcetype=WinEventLog:Security EventCode=4625
 | stats count as FailedAttempts by Source_Network_Address, Account_Name
 | where FailedAttempts > 5
 | sort - FailedAttempts
+```
+
 ---
 
 DASHBOARD
 
+```spl
 index="main" source="WinEventLog:Security"
 | stats count by EventCode
 | sort count
+```
 
+```spl
 index="main" source="WinEventLog:Security" EventCode=4625
 | stats count by EventCode
 | table count
-
+```
+```spl
 index=main sourcetype=WinEventLog:Security EventCode=4625
 | timechart span=1h count as FailedAttempts
-
+```
+```spl
 index=main sourcetype=WinEventLog:Security EventCode=4625
 | stats count by Account_Name
 | where Account_Name="gates.b@corp.com"
-
+```
+```spl
 index="main" source="WinEventLog:Security" Source_Network_Address=192.168.70.30
 | stats count by Source_Network_Address
 | table Source_Network_Address
+```
 
