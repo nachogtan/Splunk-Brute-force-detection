@@ -16,8 +16,8 @@ The frequency and volume of the events indicated a **brute-force dictionary atta
 ---
 
 ### Findings
-- **Attacker IP:** `192.168.70.30` (Kali machine)  
-- **Target account:** `gates.b@corp.com` (corp domain)  
+- **Attacker IP:** `192.168.70.30`
+- **Target account:** `gates.b@corp.com` 
 - **Total failed attempts:** 3,636  
 - **Attack vector:** Remote Desktop Protocol (RDP, TCP/3389)  
 - **Detection source:** Windows Security Logs ingested into Splunk  
