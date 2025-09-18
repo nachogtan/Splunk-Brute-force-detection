@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Tech: Splunk](https://img.shields.io/badge/Tech-Splunk-blue.svg)](https://www.splunk.com/)
 [![MITRE: T1110](https://img.shields.io/badge/MITRE-T1110-orange.svg)](https://attack.mitre.org/techniques/T1110/)
- Project overview
+
 This repository contains a lab and detection pipeline for simulating brute-force attacks (MITRE ATT&CK T1110) against a Windows Server and analyzing Windows security events in Splunk. The project includes SPL queries, dashboard examples, an L1 analyst playbook and reproducible attack scripts (for lab use only).
 
 **Environment:** isolated lab (Kali attacker → Debian router/firewall → Windows Server victim with Splunk UF → Splunk Enterprise).  
