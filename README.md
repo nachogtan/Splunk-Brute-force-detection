@@ -188,7 +188,6 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 │   └── splunk_alerts.md
 │
 ├── artifacts/
-│   ├── event_4625_sample.csv
 │   ├── firewall-rule-windows.md
 │   ├── nmap_output.txt
 │   ├── rdp-open-port.md
