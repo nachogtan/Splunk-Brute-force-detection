@@ -29,7 +29,7 @@ Lab components
 - Debian router/firewall (syslog): `192.168.56.10`
 - Kali Linux (attacker): `192.168.70.30`
   
-<img width="1319" height="897" alt="home-lab-top" src="https://github.com/user-attachments/assets/7e3d3882-fda0-4806-8619-880a4449014e" />
+See [artifacts/](artifacts/) for network topology.
 
 
 ## Requirements
@@ -244,6 +244,7 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 - artifacts/alert.png
 - artifacts/brute-force-attack-simulation-RDP.png
 - network.-scan.txt
+- home-lab-top.png
 
 ## Repository Structure
 
