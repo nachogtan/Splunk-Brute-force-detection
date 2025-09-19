@@ -243,6 +243,7 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 - artifacts/event_4625_sample.csv
 - artifacts/alert.png
 - artifacts/brute-force-attack-simulation-RDP.png
+- network.-scan.txt
 
 ## Repository Structure
 
