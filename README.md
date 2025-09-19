@@ -43,48 +43,10 @@ See [artifacts/](artifacts/) for network topology.
 
 ### Preparation
 1. Configure Windows Firewall to allow incoming `RDP` connections from the Kali attacker IP.
-
-```Powershell
-PS C:\Users\Administrator> New-NetFirewallRule -DisplayName "Allo RDP from kali" -Direction Inbound -LocalPort 3389 -Protocol TCP -RemoteAddress 192.168.70.30 -Action Allow
-
-
-Name                          : {3cf629d2-6945-4ddb-81b8-03ac35fafec4}
-DisplayName                   : Allo RDP from kali
-Description                   :
-DisplayGroup                  :
-Group                         :
-Enabled                       : True
-Profile                       : Any
-Platform                      : {}
-Direction                     : Inbound
-Action                        : Allow
-EdgeTraversalPolicy           : Block
-LooseSourceMapping            : False
-LocalOnlyMapping              : False
-Owner                         :
-PrimaryStatus                 : OK
-Status                        : The rule was parsed successfully from the store. (65536)
-EnforcementStatus             : NotApplicable
-PolicyStoreSource             : PersistentStore
-PolicyStoreSourceType         : Local
-RemoteDynamicKeywordAddresses : {}
-
-```
+See [artifacts/](artifacts/) for firewall rule.
 
 2. Ensure RDP is enabled on the Windows Server (port `3389`).  
 
-```Powershell
-PS C:\Users\Administrator>
->> Get-NetTCPConnection -LocalPort 3389
-
-LocalAddress                        LocalPort RemoteAddress                       RemotePort State       Appl
-                                                                                                         iedS
-                                                                                                         etti
-                                                                                                         ng
-------------                        --------- -------------                       ---------- -----       ----
-::                                  3389      ::                                  0          Listen
-0.0.0.0                             3389      0.0.0.0                             0          Listen
-```
 
 3. Create temporary lab accounts with known passwords for testing.  
 4. Take a snapshot of Windows Server in case a rollback is needed.
@@ -225,10 +187,13 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 │
 ├── artifacts/
 │   ├── event_4625_sample.csv
+│   ├── firewall-rule-windows.md
+│   ├── network.-scan.txt
+│   ├── rdp-open-port.md
 │   ├── screenshots/
 │   │   ├── dashboard.png
 │   │   └── alert_config.png
-│   └── README.md
+│   │   └── home-lab-top.png
 │
 ```
 ## Security & Ethics
