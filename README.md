@@ -24,7 +24,7 @@ This repository contains a lab and detection pipeline for simulating brute-force
 
 ## Architecture
 Lab components
-- Splunk Enterprise: `192.168.1.129` (index: `main`)
+- Splunk Enterprise: `192.168.56.1` (index: `main`)
 - Windows Server (victim + Splunk UF): `192.168.60.20`
 - Debian router/firewall (syslog): `192.168.56.10`
 - Kali Linux (attacker): `192.168.70.30`
