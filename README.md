@@ -108,41 +108,9 @@ Now that we have the lab set up to imitate this TTP, we are going to run our fir
 
 ```zsh
 └─$ nmap -sS -sV -O 192.168.60.1/24
-Starting Nmap 7.95 ( https://nmap.org ) at 2025-09-16 10:35 EDT
-Nmap scan report for 192.168.60.1
-Host is up (0.00068s latency).
-All 1000 scanned ports on 192.168.60.1 are in ignored states.
-Not shown: 1000 closed tcp ports (reset)
-Too many fingerprints match this host to give specific OS details
-Network Distance: 1 hop
-
-Nmap scan report for 192.168.60.20
-Host is up (0.0014s latency).
-Not shown: 988 filtered tcp ports (no-response)
-PORT     STATE SERVICE       VERSION
-53/tcp   open  domain        Simple DNS Plus
-88/tcp   open  kerberos-sec  Microsoft Windows Kerberos (server time: 2025-09-16 14:36:16Z)
-135/tcp  open  msrpc         Microsoft Windows RPC
-139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
-389/tcp  open  ldap          Microsoft Windows Active Directory LDAP (Domain: corp.com0., Site: Default-First-Site-Name)
-445/tcp  open  microsoft-ds?
-464/tcp  open  kpasswd5?
-593/tcp  open  ncacn_http    Microsoft Windows RPC over HTTP 1.0
-636/tcp  open  tcpwrapped
-3268/tcp open  ldap          Microsoft Windows Active Directory LDAP (Domain: corp.com0., Site: Default-First-Site-Name)
-3269/tcp open  tcpwrapped
-3389/tcp open  ms-wbt-server Microsoft Terminal Services
-Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
-Device type: general purpose
-Running (JUST GUESSING): Microsoft Windows 2022|11|2016 (97%)
-OS CPE: cpe:/o:microsoft:windows_server_2022 cpe:/o:microsoft:windows_11 cpe:/o:microsoft:windows_server_2016
-Aggressive OS guesses: Microsoft Windows Server 2022 (97%), Microsoft Windows 11 21H2 (91%), Microsoft Windows Server 2016 (91%)
-No exact OS matches for host (test conditions non-ideal).
-Service Info: Host: WIN-E00DDLM1BPK; OS: Windows; CPE: cpe:/o:microsoft:windows
-
-OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 256 IP addresses (2 hosts up) scanned in 19.39 seconds
 ```
+Full command outputs are stored in [artifacts/](artifacts/) for network topology.
+
 This initial Nmap scan identifies the IP of the domain controller and enumerates its open ports. The next step is to simulate a controlled brute-force attack using the `T1110` technique.
 
 **MITRE ATT&CK Mapping:**  
@@ -249,19 +217,25 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 ## Repository Structure
 
 ```bash
-/ (root)
-├─ README.md
-├─ LICENSE
-├─ splunk_alerts.md
-├─ docs/
-│ └─ playbook/L1_Playbook.md
-├─ reports/
-│ └─ incident_report.md
-└─ artifacts/
-├─ event_4625_sample.evtx
-├─ dashboard_export.json
-├─ alerts/failed_logins_alert.json
-└─ screenshots/
+.
+├── README.md 
+├── LICENSE
+│
+├── docs/
+│   ├── playbook.md
+│   ├── reports.md
+│   └── containment_log.md
+│
+├── detections/
+│   └── splunk_alerts.md
+│
+├── artifacts/
+│   ├── event_4625_sample.csv
+│   ├── screenshots/
+│   │   ├── dashboard.png
+│   │   └── alert_config.png
+│   └── README.md
+│
 ```
 ## Security & Ethics
 
