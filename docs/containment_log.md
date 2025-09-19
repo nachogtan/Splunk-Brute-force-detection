@@ -2,13 +2,13 @@
 
 Record of containment actions
 
-- **Incident ID:** 
-- **Date / Time (UTC):** 
-- **Analyst:** 
+- **Incident ID:** BF-RDP-001
+- **Date / Time (UTC):** 2025-09-16 09:00 UTC
+- **Analyst:** Ignacio
 - **Attacker IP:** 192.168.70.30
 - **Affected host(s):** WIN-E00DDLM1BPK
 - **Action taken:** (e.g., block IP on Debian firewall)
-- **Command executed (example):**
+- **Command executed:**
 
 
 ```bash
