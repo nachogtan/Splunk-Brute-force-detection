@@ -238,16 +238,29 @@ The lab simulates controlled brute-force attacks against Windows RDP accounts. F
 
 ## Evidence & Artifacts
 
-Lab outputs, logs, dashboards, and exported alerts are available in the `artifacts/` folder.  
-These include Windows Security Event logs (4625), screenshots of dashboards, and Splunk saved searches.
+I moved large outputs and exported files to the artifacts/ folder so the README stays readable. The folder contains:
+
+- artifacts/event_4625_sample.csv
+- artifacts/alert.png
+- artifacts/brute-force-attack-simulation-RDP.png
 
 ## Repository Structure
 
-- `splunk_alerts/` – Saved searches and alert configurations  
-- `playbook/` – L1 analyst playbook for triage  
-- `artifacts/` – Lab logs, screenshots, exported dashboards  
-- `docs/` – Supporting documentation
-
+```bash
+/ (root)
+├─ README.md
+├─ LICENSE
+├─ splunk_alerts.md
+├─ docs/
+│ └─ playbook/L1_Playbook.md
+├─ reports/
+│ └─ incident_report.md
+└─ artifacts/
+├─ event_4625_sample.evtx
+├─ dashboard_export.json
+├─ alerts/failed_logins_alert.json
+└─ screenshots/
+```
 ## Security & Ethics
 
 All attacks are simulated in an isolated lab environment.  
