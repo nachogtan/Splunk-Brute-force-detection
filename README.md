@@ -167,8 +167,10 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 - artifacts/event_4625_sample.csv
 - artifacts/alert.png
 - artifacts/brute-force-attack-simulation-RDP.png
-- network.-scan.txt
+- nmap_output.txt
 - home-lab-top.png
+- firewall-rule-windows.md
+- rdp-open-port.md
 
 ## Repository Structure
 
@@ -188,10 +190,10 @@ I moved large outputs and exported files to the artifacts/ folder so the README 
 ├── artifacts/
 │   ├── event_4625_sample.csv
 │   ├── firewall-rule-windows.md
-│   ├── network.-scan.txt
+│   ├── nmap_output.txt
 │   ├── rdp-open-port.md
 │   ├── screenshots/
-│   │   ├── dashboard.png
+│   │   ├── brute-force-attack-simulation-RDP.png
 │   │   └── alert_config.png
 │   │   └── home-lab-top.png
 │
