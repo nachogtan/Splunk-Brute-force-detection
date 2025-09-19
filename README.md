@@ -113,12 +113,6 @@ Full command outputs are stored in [artifacts/](artifacts/) for network topology
 
 This initial Nmap scan identifies the IP of the domain controller and enumerates its open ports. The next step is to simulate a controlled brute-force attack using the `T1110` technique.
 
-**MITRE ATT&CK Mapping:**  
-- Technique: T1110 – Brute Force  
-- Sub-technique: T1110.001 – Password Guessing  
-- Vector: RDP login attempts on Windows Server  
-- Data sources: Windows Security logs (4625), Splunk UF, syslog
-
 2. Next, we ran a dictionary attack against the target machine using the well-known  `/usr/share/wordlists/rockyou.txt.gz`.
 
 ```zsh
